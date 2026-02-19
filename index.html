@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Expense Tracker</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Expense Tracker</h2>
+
+<div class="summary">
+<p>Balance ₹<span id="balance">0</span></p>
+<p>Income ₹<span id="income">0</span></p>
+<p>Expense ₹<span id="expense">0</span></p>
+</div>
+
+<input type="text" id="desc" placeholder="Description">
+<input type="number" id="amount" placeholder="Amount">
+<input type="month" id="month">
+
+<select id="type">
+<option value="income">Income</option>
+<option value="expense">Expense</option>
+</select>
+
+<button onclick="addTransaction()">Add</button>
+
+<h3>Filter</h3>
+<select id="filter" onchange="filterTransactions()">
+<option value="all">All</option>
+<option value="income">Income</option>
+<option value="expense">Expense</option>
+</select>
+
+<ul id="transactionList"></ul>
+
+<canvas id="chart"></canvas>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
