@@ -1,47 +1,114 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Expense Tracker</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
 </head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background: (to right, #f8f9fa, #e9ecef);
+    
+}
 
+    h1{
+        text-align: center;
+        font-size: 50px;
+       
+    }
+   h1 span{
+        background-color: brown;
+       color:white;
+       padding:10px 25px;
+       border-radius: 30px;
+    }
+    div{
+        
+        width:1000px;
+        text-align: center;
+        padding: 30px;
+        ;
+    }
+    .income{
+        color:green;
+    }
+    button.income{
+       background-color: honeydew;
+    }
+    list{
+        text-align: left;
+        font-size: 100px;
+    }
+    #expense-list{
+    width: 450px;
+    margin: 30px auto;
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    text-align: center;
+
+    }
+    .desc{
+        font-size: 50px;
+    }
+    button:hover{
+        background-color: lighblue;
+    }
+
+</style>
 <body>
-
-<div class="container">
-
-<h2>Expense Tracker</h2>
-
-<div class="summary">
-<p>Balance ₹<span id="balance">0</span></p>
-<p>Income ₹<span id="income">0</span></p>
-<p>Expense ₹<span id="expense">0</span></p>
-</div>
-
-<input type="text" id="desc" placeholder="Description">
-<input type="number" id="amount" placeholder="Amount">
-<input type="month" id="month">
-
-<select id="type">
-<option value="income">Income</option>
-<option value="expense">Expense</option>
-</select>
-
-<button onclick="addTransaction()">Add</button>
-
-<h3>Filter</h3>
-<select id="filter" onchange="filterTransactions()">
-<option value="all">All</option>
-<option value="income">Income</option>
-<option value="expense">Expense</option>
-</select>
-
-<ul id="transactionList"></ul>
-
-<canvas id="chart"></canvas>
-
-</div>
-
-<script src="script.js"></script>
+    <h1><span>EXPENSE TRACKER</span></h1>
+    <div id="expense-list">
+        <h3>Balance: ₹ <span id="balance">0</span></h3>
+        <h3>Total Income: ₹ <span id="total-income">0</span></h3>
+        <h3>Total Expenses: ₹ <span id="total-expenses">0</span></h3>
+        <input type="text" id="desc" placeholder="Description">
+        <input type="number" id="number" placeholder="Enter the amount">
+        <select id="type">
+            <option value="income">income</option>
+            <option value="expense">expense</option>
+        </select>
+        <br><br>
+    <button onclick="addexpense()">add expense</button>
+    <button onclick="clearAll()">Clear All</button>
+<ul id="list"></ul>
+    </div>
+    
 </body>
+<script>
+    function addexpense(){
+        let desc=document.getElementById("desc").value;
+        let amount=Number(document.getElementById("number").value);
+        let type=document.getElementById("type").value;
+        let list=document.getElementById("list");
+
+        if(desc==""||amount==""){
+            alert("please fill all the details");
+            return;
+        }
+        let li=document.createElement("li");
+        li.innerText=desc+" "+amount;
+        li.className=type;
+        document.getElementById("list").appendChild(li);
+        let balance = 0;
+    let totalincome=0;
+    let totalexpense=0;
+        if(type=="income"){
+            balance+=amount;
+            totalincome+=amount;
+            document.getElementById("total-income").innerText=totalincome;
+        }
+        else{
+            balance=balance-amount;
+            totalexpense+=amount;
+            document.getElementById("total-expsenses").innerText=totalexpense;
+        }
+        document.getElementById("balance").innerText=balance;
+        document.getElementById("desc").value="";
+        document.getElementById("number").value="";
+        addexpense();
+    }
+</script>
 </html>
